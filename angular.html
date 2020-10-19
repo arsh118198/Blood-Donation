@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <script src="js/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="angular.min.js" type="text/javascript"></script>
+    <!--
+    <link href="css/bootstrap.min.css" type="text/css">
+-->
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script>
+        var module=angular.module("mymodule",[]);
+        module.controller("mycontroller",function($scope,$http)
+        {
+            
+            $scope.fetchAll=function()
+            {
+                
+                var url="Json-fetch-all.php";
+                $http.get(url).then(ok,notok);
+                function ok(response)
+                {
+                    $scope.jsonAry=response.data;
+                }
+                function notok(response)
+                {
+                    alert("error");
+                }
+            }
+            
+            $scope.doShow=function()
+                {
+                    alert($scope.uid+"   "+$scope.pwd);
+                }
+            $scope.showDetails=function(uid)
+                {
+                    //alert(record.uid+"   "+record.pwd);
+                    location.href="Detail-page.php?uid="+uid;
+                    alert(uid);
+                }
+            
+            $scope.doDelete=function(uid)
+            {
+                var url="delete.php?uid="+uid;
+                $http.get(url).then(ok,notok);
+                function ok(response)
+                {
+                    
+                    alert(response.data);
+                    $scope.fetchAll();
+                }
+                function notok(response)
+                {
+                    alert(response.data);
+                }
+            }
+            
+            
+            
+        });
+    </script>
+</head>
+
+<body ng-app="mymodule" ng-controller="mycontroller">
+    <table border="1" width="400">
+        <th>User id</th>
+        <th>Password</th>
+        <tr ng-repeat="record in jsonAry">
+            <td>{{$index+1}}</td>
+            <td>{{record.uid}}</td>
+            <td>{{record.pwd}}</td>
+            <td><input type="button" ng-click="showDetails(record.uid);" value="Details"></td>
+            <td align="center">
+                <input type="image" src="pics/notok.png" ng-click="doDelete(record.uid);">
+            </td>
+        </tr>
+    </table>
+    <hr>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" ng-repeat="record in jsonAry">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{record.uid}}</h5>
+                        <p class="card-text">{{record.pwd}}</p>
+                        <a href="#" class="btn btn-primary" ng-click="showDetails(record.uid);">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

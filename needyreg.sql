@@ -1,0 +1,2 @@
+INSERT INTO `needyreg`(`nid`, `nname`, `gender`, `address`, `city`, `state`, `aadharnumber`, `mobile`) VALUES ('fchjbkml@gmail.com', 'sertdyughij', 'Male', 'retyujk', 'xdcyvuhbjn', 'Punjab', 21345678, 13241651);
+INSERT INTO `needyreg`(`nid`, `nname`, `gender`, `address`, `city`, `state`, `aadharnumber`, `mobile`) VALUES ('swa@gmail.com', 'sertdyughij', 'Male', 'nm', 'bathinda', 'Punjab', 123456789, 1234567890);
